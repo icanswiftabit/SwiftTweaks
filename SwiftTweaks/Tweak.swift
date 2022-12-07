@@ -106,6 +106,19 @@ extension Tweak where T == StringOption {
 	}
 }
 
+extension Tweak where T == StringInfo {
+	public init(_ collectionName: String, _ groupName: String, _ tweakName: String, info: String) {
+		precondition(!info.isEmpty, "Default value cannot be empty (stringInfo tweak \"\(tweakName)\")")
+
+		self.init(
+			collectionName: collectionName,
+			groupName: groupName,
+			tweakName: tweakName,
+			defaultValue: StringInfo(value: info)
+		)
+	}
+}
+
 extension Tweak {
 	@available(*, deprecated, message: "replaced by 'init(_:_:_options:defaultValue:)'", renamed: "init(_:_:_options:defaultValue:)")
 	public static func stringList(_ collectionName: String, _ groupName: String, _ tweakName: String, options: [String], defaultValue: String? = nil) -> Tweak<StringOption> {
@@ -163,6 +176,8 @@ extension Tweak: TweakType {
 			return .action(
 				defaultValue: defaultValue as! TweakAction
 			)
+		case .stringInfo:
+			return .stringInfo(defaultValue: defaultValue as! StringInfo)
 		}
 	}
 

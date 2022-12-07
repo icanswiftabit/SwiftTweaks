@@ -27,9 +27,10 @@ public enum TweakViewDataType {
 	case string
 	case stringList
 	case action
+	case stringInfo
 
 	public static let allTypes: [TweakViewDataType] = [
-		.boolean, .integer, .cgFloat, .action, .double, .uiColor, .string, .stringList, 
+		.boolean, .integer, .cgFloat, .action, .double, .uiColor, .string, .stringList, .stringInfo
 	]
 }
 
@@ -45,6 +46,7 @@ public enum TweakDefaultData {
 	case string(defaultValue: String)
 	case stringList(defaultValue: StringOption, options: [StringOption])
 	case action(defaultValue: TweakAction)
+	case stringInfo(defaultValue: StringInfo)
 }
 
 // MARK: Types that conform to TweakableType
@@ -56,9 +58,22 @@ public struct StringOption {
 	}
 }
 
+public struct StringInfo {
+	public let value: String
+	public init(value: String) {
+		self.value = value
+	}
+}
+
 extension StringOption: TweakableType {
 	public static var tweakViewDataType: TweakViewDataType {
 		return .stringList
+	}
+}
+
+extension StringInfo: TweakableType {
+	public static var tweakViewDataType: TweakViewDataType {
+		return .stringInfo
 	}
 }
 

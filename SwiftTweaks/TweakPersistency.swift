@@ -180,6 +180,7 @@ private final class TweakDiskPersistency {
 			case .double: return anyObject as? Double
 			case .uiColor: return anyObject as? UIColor
 			case .string: return anyObject as? String
+			case .stringInfo: return anyObject as? String
 			case .stringList:
 				guard let stringOptionString = anyObject as? String else {
 					return nil
@@ -203,6 +204,7 @@ private extension TweakViewDataType {
 		case .string: return "string"
 		case .stringList: return "stringlist"
 		case .action: return "action"
+		case .stringInfo: return "info"
 		}
 	}
 }
@@ -219,6 +221,7 @@ private extension TweakableType {
 			case .string: return self as! NSString
 			case .stringList: return (self as! StringOption).value as AnyObject
 			case .action: return true as AnyObject
+			case .stringInfo: return self as! NSString
 		}
 	}
 }

@@ -58,6 +58,7 @@ internal final class TweakCollectionViewController: UIViewController {
 		tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.estimatedRowHeight = 44 
 		tableView.register(TweakTableCell.self, forCellReuseIdentifier: TweakCollectionViewController.TweakTableViewCellIdentifer)
 		tableView.register(TweakGroupSectionHeader.self, forHeaderFooterViewReuseIdentifier: TweakGroupSectionHeader.identifier)
 		view.addSubview(tableView)
@@ -141,7 +142,7 @@ extension TweakCollectionViewController: UITableViewDelegate {
 		case .integer, .cgFloat, .double, .string:
 			let cell = tableView.cellForRow(at: indexPath) as! TweakTableCell
 			cell.startEditingTextField()
-		case .boolean:
+		case .boolean, .stringInfo:
 			break
 		}
 	}

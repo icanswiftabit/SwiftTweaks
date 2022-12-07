@@ -194,6 +194,17 @@ internal final class TweakTableCell: UITableViewCell {
 
 		case .action:
 			accessory.bounds = .zero
+
+		case .stringInfo:
+			let textFrame = CGRect(
+				origin: .zero,
+				size: CGSize(
+					width: bounds.width * TweakTableCell.stringTextWidthFraction,
+					height: bounds.height
+				)
+			).integral
+			textField.frame = textFrame
+			accessory.bounds = textField.bounds
 		}
 	}
 	
@@ -302,6 +313,12 @@ internal final class TweakTableCell: UITableViewCell {
 			colorChit.isHidden = true
 			disclosureArrow.isHidden = false
 			selectionStyle = .default
+		case .stringInfo:
+			switchControl.isHidden = true
+			textField.isHidden = false
+			stepperControl.isHidden = true
+			colorChit.isHidden = true
+			disclosureArrow.isHidden = true
 		}
 
 		// For action tweaks, we tint the cell's text label
@@ -353,6 +370,9 @@ internal final class TweakTableCell: UITableViewCell {
 			textFieldEnabled = false
 		case .action:
 			textFieldEnabled = false
+		case let .stringInfo(value):
+			textField.text = value.value
+			textFieldEnabled = false
 		}
 
 		textFieldEnabled = textFieldEnabled && !self.isInFloatingTweakGroupWindow
@@ -398,8 +418,8 @@ internal final class TweakTableCell: UITableViewCell {
 		case let .doubleTweak(_, defaultValue: defaultValue, min: min, max: max, stepSize: step):
 			viewData = TweakViewData(type: .double, value: stepperControl.value, defaultValue: defaultValue, minimum: min, maximum: max, stepSize: step, options: nil)
 			delegate?.tweakCellDidChangeCurrentValue(self)
-		case .color, .boolean, .action, .stringList, .string:
-			assertionFailure("Shouldn't be able to update text field with a Color/Boolean/Action/StringList/String tweak.")
+		case .color, .boolean, .action, .stringList, .string, .stringInfo:
+			assertionFailure("Shouldn't be able to update text field with a Color/Boolean/Action/StringList/String/StringInfo tweak.")
 		}
 	}
 }
@@ -451,8 +471,8 @@ extension TweakTableCell: UITextFieldDelegate {
 			} else {
 				updateSubviews()
 			}
-		case .boolean, .action, .stringList:
-			assertionFailure("Shouldn't be able to update text field with a Boolean/Action/StringList tweak.")
+		case .boolean, .action, .stringList, .stringInfo:
+			assertionFailure("Shouldn't be able to update text field with a Boolean/Action/StringList/StringInfo tweak.")
 		}
 	}
 }

@@ -162,6 +162,9 @@ public final class TweakStore {
 		case let .action(defaultValue: defaultValue):
 			let currentValue = cachedValue as? TweakAction ?? defaultValue
 			return .action(value: currentValue)
+		case let .stringInfo(defaultValue):
+			let currentValue = cachedValue as? StringInfo ?? defaultValue
+			return .stringInfo(value: currentValue)
 		}
 	}
 	
