@@ -9,7 +9,7 @@
 import UIKit
 
 /// Looks up the persisted state for tweaks.
-public final class TweakStore {
+public final class TweakStore: @unchecked Sendable {
 
 	/// The "tree structure" for our Tweaks UI.
 	fileprivate var tweakCollections: [String: TweakCollection] = [:]

@@ -18,7 +18,7 @@ public protocol TweakableType {
 /// The data types that are currently supported for SwiftTweaks.
 /// While Tweak<T> is generic, we have to build UI for editing each kind of <T> - hence the need for a protocol to restrict what cavare tweaked.
 /// Of course, we can add new TweakViewDataTypes over time, too!
-public enum TweakViewDataType {
+public enum TweakViewDataType: Sendable {
 	case boolean
 	case integer
 	case cgFloat
@@ -37,7 +37,7 @@ public enum TweakViewDataType {
 /// An enum for use inside Tweaks' editing UI.
 /// Our public type-erasure (AnyTweak) means that this has to be public, unfortunately
 /// ...but there's no need for you to directly use this enum.
-public enum TweakDefaultData {
+public enum TweakDefaultData: Sendable {
 	case boolean(defaultValue: Bool)
 	case integer(defaultValue: Int, min: Int?, max: Int?, stepSize: Int?)
 	case float(defaultValue: CGFloat, min: CGFloat?, max: CGFloat?, stepSize: CGFloat?)
@@ -51,14 +51,14 @@ public enum TweakDefaultData {
 
 // MARK: Types that conform to TweakableType
 
-public struct StringOption {
+public struct StringOption: Sendable {
 	public let value: String
 	public init(value: String) {
 		self.value = value
 	}
 }
 
-public struct StringInfo {
+public struct StringInfo: Sendable {
 	public let value: String
 	public init(value: String) {
 		self.value = value

@@ -13,7 +13,7 @@ import UIKit
 /// Tweaks let you adjust things on the fly.
 /// Because each T needs a UI component, we have to restrict what T can be - hence T: TweakableType.
 /// If T: Comparable, you can declare a min / max / stepSize for a Tweak.
-public struct Tweak<T: TweakableType> {
+public struct Tweak<T: TweakableType & Sendable> {
 	public let collectionName: String
 	public let groupName: String
 	public let tweakName: String

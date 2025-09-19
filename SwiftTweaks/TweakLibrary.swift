@@ -9,7 +9,7 @@
 import Foundation
 
 /// Create a public struct in your application that conforms to this protocol to declare your own tweaks!
-public protocol TweakLibraryType {
+public protocol TweakLibraryType: Sendable {
 	static var defaultStore: TweakStore { get }
 }
 

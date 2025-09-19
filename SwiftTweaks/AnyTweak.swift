@@ -9,7 +9,7 @@
 import Foundation
 
 /// A type-erasure around Tweak<T>, so we can collect them together in TweakLibraryType.
-public struct AnyTweak: TweakType {
+public struct AnyTweak: TweakType, Sendable {
 	public let tweak: TweakType
 
 	public var collectionName: String { return tweak.collectionName }
@@ -25,7 +25,7 @@ public struct AnyTweak: TweakType {
 }
 
 /// When combined with AnyTweak, this provides our type-erasure around Tweak<T>
-public protocol TweakType: TweakClusterType {
+public protocol TweakType: TweakClusterType, Sendable {
 	var tweak: TweakType { get }
 
 	var collectionName: String { get }

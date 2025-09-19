@@ -9,7 +9,7 @@
 import Foundation
 
 /// A collection of TweakGroups; used in the root level of the Tweaks UI.
-internal struct TweakCollection {
+internal struct TweakCollection: Sendable {
 	let title: String
 	var tweakGroups: [String: TweakGroup] = [:]
 

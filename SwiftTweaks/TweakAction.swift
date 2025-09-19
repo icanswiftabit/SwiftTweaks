@@ -11,7 +11,7 @@ import UIKit
 
 public typealias TweakActionClosure = () -> Void
 
-public class TweakAction {
+public class TweakAction: @unchecked Sendable {
 	public enum Error: Swift.Error {
 		case wrongIdentifier
 	}
